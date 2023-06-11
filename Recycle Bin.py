@@ -1,0 +1,95 @@
+
+import turtle
+t = turtle.Turtle()                                     
+screen = turtle.Screen()
+triangle_side_length = 700                                    
+triangle_height = triangle_side_length / (3 ** (1/2))          
+center = (0, -(1 / 16) * triangle_height)                       
+counter = 1                                                    
+def triangle(length):                                           
+    t.forward(length / 2)                                          
+    t.right(120)                                                    
+    for i in range(2):
+        t.forward(length)
+        t.right(120)
+    t.forward(length / 2)
+def triangle_corner():                                          
+    t.fillcolor("white")
+    t.begin_fill()
+    for i in range(3):
+        t.forward(triangle_side_length / (3 ** (1 / 2)))
+        t.right(120)
+    t.end_fill()
+def gap():                                                      
+    t.fillcolor("white")
+    t.begin_fill()
+    t.forward((5 / 9) * triangle_side_length / (2 * 3 ** (1 / 2)))
+    t.pencolor("white")
+    t.left(90)
+    t.forward((1 / 9) * triangle_side_length)
+    t.left(90)
+    t.forward((5 / 9) * triangle_side_length / (2 * 3 ** (1 / 2)))
+    t.left(90)
+    t.forward((1 / 9) * triangle_side_length)
+    t.end_fill()
+def arrow_head():                                             
+    t.fillcolor("green")
+    t.begin_fill()
+    t.forward((1 / 6) * triangle_side_length)
+    t.left(150)
+    t.forward((1 / 6) * triangle_side_length * (3 ** (1 / 2)))
+    t.left(150)
+    t.forward((1 / 6) * triangle_side_length)
+    t.end_fill()
+for length in [triangle_side_length, (4 / 9) * triangle_side_length]:
+    t.penup()                                            
+    t.goto(center)                                                  
+    t.setheading(30)
+    t.forward(length / (2 * 3 ** (1 / 2)))
+    t.right(90)
+    t.pendown()
+    if counter == (1):                                          
+        t.pencolor("green")
+        t.fillcolor("green")
+        t.begin_fill()
+        triangle(length)
+        t.end_fill()
+        counter = 2
+    else:                                                        
+        t.pencolor("white")
+        t.fillcolor("white")
+        t.begin_fill()
+        triangle(length)
+        t.end_fill()
+t.penup()                                                       
+t.pensize(2)
+for i in range(3):
+    t.goto(center)
+    t.setheading(-30 + i * 120)
+    t.forward((1/2) * triangle_side_length * 3 ** (1 / 2))
+    t.right(150)
+    t.pendown
+    triangle_corner()
+    t.penup()
+t.penup()                                                       
+for i in range(3):
+    t.goto(center)
+    t.setheading(-90 - i * 120)
+    t.forward((2 / 9) * triangle_side_length / (3 ** (1 / 2)))
+    t.right(90)
+    t.forward((1/20) * triangle_side_length)
+    t.left(90)
+    t.pendown()
+    gap()
+    t.penup()
+t.pencolor("green")                                             
+for i in range(3):
+    t.penup()
+    t.goto(center)
+    t.setheading(-90 - i * 120)
+    t.forward((13 / 36) * triangle_side_length / (3 ** (1/2)))
+    t.left(30) 
+    t.pendown()
+    arrow_head()
+t.hideturtle()
+screen.exitonclick()
